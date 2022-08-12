@@ -1,0 +1,19 @@
+# action.yml
+name: 'Bump Version'
+description: 'Bump the major, minor, or patch part of a semantic version string'
+inputs:
+  version:
+    description: 'The version string to be incremented'
+    required: true
+  part:
+    description: The part of the version to bump, must be one of major, minor, match, pre, or release
+    required: true
+outputs:
+  version: # id of output
+    description: 'The new version number'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.part }}
+    - ${{ inputs.version }}
