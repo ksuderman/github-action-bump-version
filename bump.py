@@ -1,48 +1,62 @@
 #!/usr/bin/env python3
 
+import os
 import re
 import sys
 
 type = sys.argv[1]
-version = sys.argv[2]
 
-is_prerelease = '-' in version
+def get_version(path: str) -> str:
+    with open(path, 'r') as f:
+        line = f.readline()
+        if line.startswith('version:'):
+            return line.split(':')[1].strip()
+    return '0.0.0'
 
-if type in ['major', 'minor', 'patch'] and is_prerelease:
-    print("ERROR: can not bump the semver of a pre-release version. Use the 'release' type.")
-    sys.exit(1)
-
-semver = version.split('.')
-major = int(semver[0])
-minor = int(semver[1])
-patch = semver[2]
-
-if is_prerelease:
-    parts = patch.split('-')
-    patch = int(parts[0])
-    regex = re.search('([a-zA-Z]+)([0-9]+)', parts[1])
-    prerelease = regex.group(1)
-    build = int(regex.group(2))
-    if type == 'build':
-        build += 1
-        print(f"{major}.{minor}.{patch}-{prerelease}{build}")
-    elif type == 'release':
-        print(f"{major}.{minor}.{patch}")
-        pass
+def run():
+    # version_file = sys.argv[1]
+    # if not os.path.exists(version_file):
+    #     print("Version file not found.")
+    #     sys.exit(1)
+    # old_version = get_version(version_file)
+    type = sys.argv[1]
+    version = sys.argv[2]
+    tagged = '-' in version
+    tag = ''
+    if tagged:
+        parts = version.split('-')
+        version = parts[0]
+        (tag, patch) = parts[1].split('.')
+    if type in ['major', 'minor', 'patch']:
+        semver = version.split('.')
+        major = int(semver[0])
+        minor = int(semver[1])
+        patch = int(semver[2])
+        if type == 'major':
+            major += 1
+            minor = 0
+            patch = 0
+        elif type == 'minor':
+            minor += 1
+            patch = 0
+        elif type == 'patch':
+            patch += 1
+        if tagged:
+            print(f"{major}.{minor}.{patch}-{tag}.1")
+        else:
+            print(f"{major}.{minor}.{patch}")
+    elif type == 'tag':
+        tag = sys.argv[3]
+        if tagged:
+            print("ERROR: can not tag a previously tagged version.")
+            sys.exit(1)
+        print(f"{version}-{tag}.1")
     else:
-        print(f"ERROR: Invalid bump type {type}")
-        sys.exit(1)
-elif type == 'major':
-    major += 1
-    minor = 0
-    patch = 0
-elif type == 'minor':
-    minor += 1
-    patch = 0
-elif type == 'patch':
-    patch += 1
-else:
-    print("ERROR: Invalid parameter: {type}")
-    sys.exit(1)
+        if type != tag:
+            print("ERROR: No such tag")
+            return
+        print(f"{version}-{tag}.{int(patch) + 1}")
 
-print(f"::set-output name=version::{major}.{minor}.{patch}")
+
+if __name__ == '__main__':
+    run()

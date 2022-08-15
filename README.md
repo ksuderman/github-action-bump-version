@@ -10,21 +10,35 @@ of pre-release versions, eg 1.0.0-beta5
 
 **Required** one of `major`, `minor`, `patch`, `build`, or `release`.
 
-## `version`
+## `command`
 
-**Required** the semantic version string to be incremented
+**Required** the shell command used to extract the current version number.
 
-## Outputs
+## `file`
 
-## `version`
+**Required** the path to the file containing the version number.
 
-The new version string
+## Notes
+
+The version `file` should contain the string `version: x.y.z` on a line by itself (awk), or should contain a single line with the version number (cat).
 
 ## Example usage
 
+Update the version in a Helm Chart
 ```yaml
 uses: ksuderman/github-action-bump-version@v1
 with:
-  version: $VERSION
-  type: $LABEL
+  type: ${{ join(github.event.pull_request.labels.*.name, ' ') }}
+  command: awk
+  file: Chart.yaml
 ```
+
+Update the version in a VERSION file or similar
+```yaml
+uses: ksuderman/github-action-bump-version@v1
+with:
+  type: ${{ join(github.event.pull_request.labels.*.name, ' ') }}
+  command: cat
+  file: VERSION
+```
+
