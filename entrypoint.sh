@@ -34,5 +34,9 @@ else
   echo $new_version > $version_file
 fi
 
+git add $version_file
+git commit -m "Automatic version bump to $new_version"
+branch=$(git branch | awk '/\*/{print $2}')
+git push origin $branch
 echo "Updated version from $current_version to $new_version"
 
