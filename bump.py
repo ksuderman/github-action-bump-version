@@ -4,14 +4,13 @@ import os
 import re
 import sys
 
-type = sys.argv[1]
-
 def get_version(path: str) -> str:
     with open(path, 'r') as f:
         line = f.readline()
         if line.startswith('version:'):
             return line.split(':')[1].strip()
     return '0.0.0'
+
 
 def run():
     # version_file = sys.argv[1]
