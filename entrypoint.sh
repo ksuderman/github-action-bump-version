@@ -24,7 +24,7 @@ else
   exit 1
 fi
 
-new_version=$(python3 bump.py $type $current_version)
+new_version=$(python3 /bump.py $type $current_version)
 
 if [[ $command == 'awk' ]] ; then
   tmp=$(mktemp)
