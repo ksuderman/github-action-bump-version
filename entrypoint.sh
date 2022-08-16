@@ -29,6 +29,7 @@ echo "Type   : $type"
 echo "Command: $command"
 echo "Version: $current_version"
 new_version=$(python3 /bump.py $type $current_version)
+echo "New version: $new_version"
 
 if [[ $command == 'awk' ]] ; then
   tmp=$(mktemp)
