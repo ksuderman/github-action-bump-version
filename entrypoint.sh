@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 set -eu
 
-type=$(echo $1 | awk \
-  '/major/{ print "major"; exit}
-  /minor/{print "minor" ; exit}
-  /patch/{print "patch" ; exit}')
+#type=$(echo $1 | awk \
+#  '/major/{ print "major"; exit}
+#  /minor/{print "minor" ; exit}
+#  /patch/{print "patch" ; exit}')
 
+type=$1
 command=$2
 version_file=$3
 
