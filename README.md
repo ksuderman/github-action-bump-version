@@ -8,11 +8,11 @@ of pre-release versions, eg 1.0.0-beta5
 
 ## `type`
 
-**Required** one of `major`, `minor`, `patch`, `build`, or `release`.
+**Required** one of `major`, `minor`, `patch`
 
 ## `command`
 
-**Required** the shell command used to extract the current version number.
+**Required** the shell command used to extract the current version number.  Must be one of `awk` or `cat`.
 
 ## `file`
 
