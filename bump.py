@@ -18,7 +18,7 @@ def run():
     #     print("Version file not found.")
     #     sys.exit(1)
     # old_version = get_version(version_file)
-    print(sys.argv)
+    #print(sys.argv)
     type = sys.argv[1]
     version = sys.argv[2]
     tagged = '-' in version
