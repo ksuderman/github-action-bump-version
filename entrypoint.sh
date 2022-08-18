@@ -15,12 +15,12 @@ if [[ ! -e $version_file ]] ; then
   exit 1
 fi
 
-if [[ parser == 'awk' ]] ; then
+if [[ $parser == 'awk' ]] ; then
   current_version=$(awk '/^version:/{ print $2 }' $version_file)
-elif [[ parser == 'cat' ]] ; then
+elif [[ $parser == 'cat' ]] ; then
   current_version=$(cat $version_file)
 else
-  echo "Invalid option: $parser"
+  echo "Invalid option: '$parser'"
   echo "Must be one of [awk|cat]"
   exit 1
 fi
