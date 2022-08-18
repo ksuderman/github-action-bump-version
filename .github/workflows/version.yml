@@ -10,6 +10,8 @@ jobs:
         with:
            persist-credentials: false
       - uses: ksuderman/github-action-bump-version@dev
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         with:
           parser: cat
           file: VERSION
