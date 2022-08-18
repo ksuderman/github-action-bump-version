@@ -7,7 +7,7 @@ set -eu
 #  /patch/{print "patch" ; exit}')
 
 type=$1
-command=$2
+parser=$2
 version_file=$3
 
 if [[ ! -e $version_file ]] ; then
@@ -15,9 +15,9 @@ if [[ ! -e $version_file ]] ; then
   exit 1
 fi
 
-if [[ $command == 'awk' ]] ; then
+if [[ parser == 'awk' ]] ; then
   current_version=$(awk '/^version:/{ print $2 }' $version_file)
-elif [[ $command == 'cat' ]] ; then
+elif [[ parser == 'cat' ]] ; then
   current_version=$(cat $version_file)
 else
   echo "Invalid option: $command"
@@ -25,11 +25,7 @@ else
   exit 1
 fi
 
-echo "Type   : $type"
-echo "Command: $command"
-echo "Version: $current_version"
 new_version=$(python3 /bump.py $type $current_version)
-echo "New version: $new_version"
 
 if [[ $command == 'awk' ]] ; then
   tmp=$(mktemp)
