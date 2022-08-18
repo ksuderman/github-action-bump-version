@@ -28,7 +28,7 @@ def run():
         version = parts[0]
         (tag, patch) = parts[1].split('.')
     if type == 'simple':
-        m = re.search("(\w+)(\d+)")
+        m = re.search("(\w+)(\d+)", version)
         print(f"{m.group(1)}{int(m.group(2)) + 1}")
     elif type in ['major', 'minor', 'patch']:
         semver = version.split('.')
