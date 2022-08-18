@@ -24,7 +24,7 @@ Update the version in a Helm Chart
 uses: ksuderman/github-action-bump-version@v2
 with:
   type: ${{ join(github.event.pull_request.labels.*.name, ' ') }}
-  command: awk
+  parser: awk
   file: Chart.yaml
 ```
 
@@ -33,7 +33,7 @@ Update the version in a VERSION file or similar
 uses: ksuderman/github-action-bump-version@v2
 with:
   type: ${{ join(github.event.pull_request.labels.*.name, ' ') }}
-  command: cat
+  parser: cat
   file: VERSION
 ```
 
