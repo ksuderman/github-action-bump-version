@@ -3,9 +3,9 @@ name: 'Bump Version'
 description: 'Bump the major, minor, or patch part of a semantic version string'
 inputs:
   type:
-    description: The part of the version to bump, must be one of major, minor, patch, or a release name (e.g. anvil)
+    description: The part of the version to bump, must be one of simple, major, minor, patch, or a release name (e.g. anvil)
     required: true
-  command:
+  parser:
     description: One of 'awk' or 'cat'. The command used to extract the current version.
     required: true
   file:
@@ -15,5 +15,5 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.type }}
-    - ${{ inputs.command }}
+    - ${{ inputs.parser }}
     - ${{ inputs.file }}
