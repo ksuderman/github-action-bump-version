@@ -6,8 +6,8 @@ on:
     branches:
       - master
 jobs:
-  version:
-    name: Bump the version number
+  release:
+    name: Bump the version number, tag, and release.
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
@@ -18,17 +18,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          parser: cat
           file: VERSION
+          parser: cat
           type: simple
-  release:
-    name: Tag and Release
-    needs: version
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: master
       - uses: ksuderman/github-action-tag-release@v2
         env:
           GITHUB_TOKEN: ${{ github.token }}
