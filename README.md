@@ -8,7 +8,7 @@ of pre-release versions, eg 1.0.0-beta.5
 
 - `type`<br/>
    **Required** one of `simple`, `major`, `minor`, `patch` or a string representing a pre-release type (e.g. `dev` or `rc`)
-- `command`<br/>
+- `parser`<br/>
    **Required** the shell command used to extract the current version number.  Must be one of `awk` or `cat`.
 - `file`<br/>
    **Required** the path to the file containing the version number.
