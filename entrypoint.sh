@@ -42,6 +42,7 @@ git config --global user.name $(git --no-pager log --format=format:'%an' -n 1)
 git add $version_file
 git commit -m "Automatic version bump to $new_version"
 branch=$(git branch | awk '/\*/{print $2}')
+echo "Pushing branch $branch"
 git push origin $branch
 echo "Updated version from $current_version to $new_version"
 

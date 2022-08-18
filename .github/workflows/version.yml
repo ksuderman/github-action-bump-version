@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-           persist-credentials: false
+           persist-credentials: true
       - uses: ksuderman/github-action-bump-version@dev
         env:
           GITHUB_TOKEN: ${{ github.token }}
