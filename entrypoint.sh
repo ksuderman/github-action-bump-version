@@ -36,8 +36,8 @@ else
 fi
 
 git config --global --add safe.directory /github/workspace
-git config user.email $(git --no-pager log --format=format:'%ae' -n 1)
-git config user.name $(git --no-pager log --format=format:'%an' -n 1)
+git config --global user.email $(git --no-pager log --format=format:'%ae' -n 1)
+git config --global user.name $(git --no-pager log --format=format:'%an' -n 1)
 
 git add $version_file
 git commit -m "Automatic version bump to $new_version"
