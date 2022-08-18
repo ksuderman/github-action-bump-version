@@ -20,14 +20,14 @@ if [[ parser == 'awk' ]] ; then
 elif [[ parser == 'cat' ]] ; then
   current_version=$(cat $version_file)
 else
-  echo "Invalid option: $command"
+  echo "Invalid option: $parser"
   echo "Must be one of [awk|cat]"
   exit 1
 fi
 
 new_version=$(python3 /bump.py $type $current_version)
 
-if [[ $command == 'awk' ]] ; then
+if [[ $parser == 'awk' ]] ; then
   tmp=$(mktemp)
   sed "s/^version:.*/version: $new_version/" $version_file > $tmp
   mv $tmp $version_file
