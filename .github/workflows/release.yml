@@ -1,10 +1,29 @@
 name: Perform a release
 on:
-  workflow_dispatch:
+  pull_request_target:
+    types:
+      - closed
+    branches:
+      - master
 jobs:
+  version:
+    name: Bump the version number version
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+           persist-credentials: true
+      - uses: ksuderman/github-action-bump-version@dev
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          parser: cat
+          file: VERSION
+          type: simple
   release:
-    #if: github.event.pull_request.merged == true
     name: Tag and Release
+    needs: version
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
