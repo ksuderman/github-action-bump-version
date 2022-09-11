@@ -20,7 +20,7 @@ jobs:
         with:
           file: VERSION
           parser: cat
-          type: simple
+          type: release
       - uses: ksuderman/github-action-tag-release@v2
         env:
           GITHUB_TOKEN: ${{ github.token }}
