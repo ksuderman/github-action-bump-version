@@ -48,6 +48,8 @@ def run():
             print(f"{major}.{minor}.{patch}-{tag}.1")
         else:
             print(f"{major}.{minor}.{patch}")
+    elif type == 'release':
+        print(version.split('-')[0])
     elif type == 'tag':
         tag = sys.argv[3]
         if tagged:
