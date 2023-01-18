@@ -21,8 +21,6 @@ def run():
     #print(sys.argv)
     type = sys.argv[1]
     version = sys.argv[2]
-    print(f"Type: {type}")
-    print(f"Version: {version}")    
     tagged = '-' in version
     tag = ''
     if tagged:
@@ -60,7 +58,7 @@ def run():
         print(f"{version}-{tag}.1")
     else:
         if type != tag:
-            print(f"ERROR: No such tag {tag} type is {type}")
+            print(version)
             return
         print(f"{version}-{tag}.{int(patch) + 1}")
 
