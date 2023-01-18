@@ -24,7 +24,7 @@ else
   echo "Must be one of [awk|cat]"
   exit 1
 fi
-
+echo "Current version is $current_version"
 new_version=$(python3 /bump.py $type $current_version)
 
 if [[ $parser == 'awk' ]] ; then
