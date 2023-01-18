@@ -60,7 +60,7 @@ def run():
         print(f"{version}-{tag}.1")
     else:
         if type != tag:
-            print("ERROR: No such tag")
+            print(f"ERROR: No such tag {tag} type is {type}")
             return
         print(f"{version}-{tag}.{int(patch) + 1}")
 
