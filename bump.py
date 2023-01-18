@@ -13,12 +13,6 @@ def get_version(path: str) -> str:
 
 
 def run():
-    # version_file = sys.argv[1]
-    # if not os.path.exists(version_file):
-    #     print("Version file not found.")
-    #     sys.exit(1)
-    # old_version = get_version(version_file)
-    #print(sys.argv)
     type = sys.argv[1]
     version = sys.argv[2]
     tagged = '-' in version
@@ -27,6 +21,9 @@ def run():
         parts = version.split('-')
         version = parts[0]
         (tag, patch) = parts[1].split('.')
+    print(f"Type: {type}")
+    print(f"Vers: {version}")
+    print(f"Tag : {tag}")
     if type == 'simple':
         m = re.search("(\w+)(\d+)", version)
         print(f"{m.group(1)}{int(m.group(2)) + 1}")
@@ -56,10 +53,9 @@ def run():
             print("ERROR: can not tag a previously tagged version.")
             sys.exit(1)
         print(f"{version}-{tag}.1")
+    elif type != tag:
+        print(f"ERROR: No such tag")
     else:
-        if type != tag:
-            print("ERROR: No such tag")
-            return
         print(f"{version}-{tag}.{int(patch) + 1}")
 
 

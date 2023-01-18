@@ -15,6 +15,7 @@ jobs:
         with:
            persist-credentials: true
       - uses: ksuderman/github-action-bump-version@dev
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
