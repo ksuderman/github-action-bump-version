@@ -21,6 +21,8 @@ def run():
     #print(sys.argv)
     type = sys.argv[1]
     version = sys.argv[2]
+    print(f"Type: {type}")
+    print(f"Version: {version}")    
     tagged = '-' in version
     tag = ''
     if tagged:
